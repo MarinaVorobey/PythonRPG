@@ -1,17 +1,10 @@
-class Warrior:
+class Player:
     def __init__(self):
-        self.actions = [
-            "normal_attack",
-            "shield_bash",
-            "blessing_of_healing",
-            "charge",
-            "divine_fire",
-        ]
         self.lv = 1
 
         self.hp = 120
         self.max_hp = 120
-        self.attack = 25
+
         self.dodge = False
         self.turn_bonus = 0
 
@@ -21,6 +14,20 @@ class Warrior:
         self.elem_damage = {"poison_damage": 0, "burn_damage": 0}
 
         self.damage_mult = 1
+
+
+class Warrior(Player):
+    def __init__(self):
+        super().__init__()
+        self.attack = 25
+
+        self.actions = [
+            "normal_attack",
+            "shield_bash",
+            "blessing_of_healing",
+            "charge",
+            "divine_fire",
+        ]
         self.cooldown = {
             "normal_attack": 0,
             "shield_bash": 0,
@@ -88,8 +95,11 @@ class Warrior:
         return "You pray to gods of war and summon fire rain. It burns your foe but you get caught in it as well."
 
 
-class Rogue:
+class Rogue(Player):
     def __init__(self):
+        super().__init__()
+        self.attack = 20
+
         self.actions = [
             "normal_attack",
             "poison_dagger",
@@ -97,20 +107,6 @@ class Rogue:
             "evasion",
             "shadow_dance",
         ]
-        self.lv = 1
-
-        self.hp = 120
-        self.max_hp = 120
-        self.attack = 20
-        self.dodge = False
-        self.turn_bonus = 0
-
-        self.stunned = False
-        self.debuffed = 0
-        self.afflicted = {"debuff": 0, "burning": 0, "poisoned": 0}
-        self.elem_damage = {"poison_damage": 0, "burn_damage": 0}
-
-        self.damage_mult = 1
         self.cooldown = {
             "normal_attack": 0,
             "poison_dagger": 0,
