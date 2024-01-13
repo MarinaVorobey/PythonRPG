@@ -2,15 +2,21 @@ from fighting import *
 
 
 def boss_fight(monster1, monster2, player, ascii):
-    print(f"You are versing the Chimera. It is said that chimera has two minds in one body.")
+    print(
+        f"You are versing the Chimera. It is said that chimera has two minds in one body."
+    )
     print(ascii["chimera"])
 
     while (monster1.hp > 0 or monster2.hp > 0) and player.hp > 0:
         rprint(f"Your health is [bold spring_green2]{player.hp}[/bold spring_green2].")
         if monster1.hp > 0:
-            rprint(f"The {monster1.name}'s health is [bold red3]{monster1.hp}[/bold red3].")
+            rprint(
+                f"The {monster1.name}'s health is [bold red3]{monster1.hp}[/bold red3]."
+            )
         if monster2.hp > 0:
-            rprint(f"The {monster2.name}'s health is [bold red3]{monster2.hp}[/bold red3].")
+            rprint(
+                f"The {monster2.name}'s health is [bold red3]{monster2.hp}[/bold red3]."
+            )
 
         player_elem_dmg = announce_elem_dmg(player, "You are", "you")
         if player_elem_dmg:
@@ -27,7 +33,13 @@ def boss_fight(monster1, monster2, player, ascii):
         if monster2.hp > 0:
             heads.append(monster2)
 
-        monster_pick = [inquirer.List("attack", message="Who would you like to attack?", choices=[head.name for head in heads])]
+        monster_pick = [
+            inquirer.List(
+                "attack",
+                message="Who would you like to attack?",
+                choices=[head.name for head in heads],
+            )
+        ]
         monster_choice = inquirer.prompt(monster_pick)
         if monster_choice["attack"] == monster1.name:
             player_act(player, monster1)
@@ -38,7 +50,6 @@ def boss_fight(monster1, monster2, player, ascii):
             break
         rage(monster1, monster2)
         rage(monster2, monster1)
-
 
         for head in heads:
             if head.hp > 0:
@@ -77,7 +88,6 @@ def boss_fight(monster1, monster2, player, ascii):
     player.turn_bonus = 0
     if player.hp <= 0:
         print("Unfortunately you have perished.")
-        player.life = False
     else:
         rprint("The [deep_pink2]victory[/deep_pink2] is yours. Congratulations.")
 
@@ -85,12 +95,14 @@ def boss_fight(monster1, monster2, player, ascii):
 def elem_damage(target):
     elem_dmg = announce_elem_dmg(target, f"{target.name} is", target.name)
     if elem_dmg:
-            rprint(elem_dmg)
+        rprint(elem_dmg)
 
 
 def rage(target, actor):
     if target.hp <= 0 and actor.rage == False:
-        print(f"{actor.name} roars in blind rage. {actor.name}'s attack increased by two times!")
+        print(
+            f"{actor.name} roars in blind rage. {actor.name}'s attack increased by two times!"
+        )
         actor.stunned = True
         actor.rage = True
         actor.dmg_mult = 2
